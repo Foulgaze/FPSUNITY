@@ -40,7 +40,7 @@ public class GrenadeCount : MonoBehaviour
 
     public void changeNade()
     {
-        transform.GetComponent<WeaponSwitch>().changeWeapon(0);
+        transform.GetComponent<WeaponSwitch>().CmdChangeWeapon(0);
     }
 
     // Update is called once per frame

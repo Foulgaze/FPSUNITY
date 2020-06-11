@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
 
    
     public int health = 100;
+
     public HealthBar healthBar;
     // Start is called before the first frame update
     void Start()
@@ -20,11 +21,10 @@ public class Target : MonoBehaviour
     {
         health -= amount;
         healthBar.SetHealth(health);
-        Debug.Log(health);
-        if (health <= 0)
-        {
-            Die();
-        }
+        //if (health <= 0)
+        //{
+        //    Die();
+        //}
     }
     public void Die()
     {

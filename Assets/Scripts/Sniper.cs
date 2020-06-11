@@ -23,6 +23,7 @@ public class Sniper : MonoBehaviour
     public float timeLeft;
     AudioSource audio;
     public Canvas ammoVisual;
+    GunDamage dmg;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class Sniper : MonoBehaviour
         bulletCount = bulletMax;
         reloading = false;
         audio = gameObject.GetComponent<AudioSource>();
+        dmg = transform.parent.parent.GetComponent<GunDamage>();
         Debug.Log("Start");
 
 
@@ -109,7 +111,8 @@ public class Sniper : MonoBehaviour
                 Target target = hit.transform.GetComponent<Target>();
                 if (target != null)
                 {
-                    target.TakeDamage((int)100);
+                    dmg.lowerGun(hit.transform.name, (int)100);
+                    //target.TakeDamage((int)100);
                 }
                 else if (hit.transform.tag.Equals("Grenade"))
                 {

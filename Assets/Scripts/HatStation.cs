@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class HatStation : MonoBehaviour
+public class HatStation : NetworkBehaviour
 {
     public bool hasHat = true;
     float timerCount;
-    float rehatTime = 30f;
+    float rehatTime = 1f;
     public GameObject currentHat;
 
     // Start is called before the first frame update
@@ -22,17 +23,18 @@ public class HatStation : MonoBehaviour
         {
             timerCount += Time.deltaTime;
         }
-        
-        if(timerCount > rehatTime && hasHat == false)
+
+        if (timerCount > rehatTime && hasHat == false)
         {
             hasHat = true;
-            updateHat();
+            CmdupdateHat();
             timerCount = 0;
         }
     }
 
-    public void updateHat()
-    {
+    [Command]
+    public void CmdupdateHat()
+    {  
         if (hasHat)
         {
             transform.GetChild(0).gameObject.SetActive(true);

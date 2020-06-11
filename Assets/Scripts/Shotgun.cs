@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Shotgun : MonoBehaviour
 {
@@ -121,9 +122,12 @@ public class Shotgun : MonoBehaviour
         {
             pellets[i] = UnityEngine.Random.rotation;
             GameObject p = Instantiate(pellet, barrelExit.position, barrelExit.rotation);
+            
             p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
             p.GetComponent<Rigidbody>().velocity = cam.transform.parent.GetComponent<CharacterController>().velocity;
             p.GetComponent<Rigidbody>().AddForce(p.transform.forward * pelletFireVel);
+            p.GetComponent<pellet>().gun = transform.parent.parent.GetComponent<GunDamage>();
+            NetworkServer.Spawn(p);
             i++;
             Destroy(p.transform.gameObject, 2);
         }
